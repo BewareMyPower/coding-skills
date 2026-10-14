@@ -33,4 +33,5 @@ The user is reading a branch and asks short judgement questions about it. Serve 
 - Change only what was asked and confirmed; leave neighbouring entries alone.
 - Keep each prose paragraph and list item on one source line.
 - After editing, `git add` the touched files and stop there. Do not commit, push, rebase, or run any other history operation unless the user explicitly asks for it.
+- Exception: when the edit exists only to show the user how much a demo change (e.g. a refactoring) would modify, leave it unstaged so `git diff` shows the full extent of the change.
 - Report what changed and the evidence that justified it, briefly.
