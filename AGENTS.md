@@ -23,7 +23,8 @@
 - Keep comment lines to at most 120 characters, filling up to the limit before wrapping: wrap at the 120-column boundary, not at 80 or another narrower default. Fold a comment to a single line whenever it fits within 120.
 - Never restate "what" the code already says: no mechanism walkthroughs or algorithm steps in declaration docs, and no notes about how other types use this one — that belongs to the other type's own doc.
 - Put non-obvious "why" (invariants, assumptions, rationale, failure/retry behavior) in a short comment at the exact code site where the behavior occurs, not in the declaration doc.
-- To clean up existing comments, run `/no-comments` rather than editing them ad hoc.
+- A private function or method with exactly one call site deserves a second look: consider inlining it into that caller. Inlining tends to remove parameter plumbing, often lets the helper stop returning what the caller already holds, and makes error handling more direct; length alone is not a reason to extract.
+- Keep the helper when the caller would otherwise mix unrelated concerns, or when the helper is what a comment, a test, or a second call site needs.
 
 ## Tests
 
