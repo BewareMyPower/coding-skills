@@ -30,4 +30,15 @@
 
 - Cover each behavior at the highest level that can exercise it reliably (API, operation flow, or e2e) instead of duplicating the same coverage in unit tests.
 - Reserve unit tests for what higher-level tests cannot exercise deterministically, such as concurrency, atomicity, and race conditions.
+- Do not add tests whose only purpose is to assert log field names, field combinations, or structured log payload shape. Logs are operational side effects unless their schema is a documented contract; test the behavior that produces the log instead.
+- Do not assert the absence of fields or behavior that never existed; negative assertions should guard a real, previously observed regression.
 - Do not add comments to test functions: the test name and its assertions are the documentation.
+
+## Chinese
+
+The following words should be avoided in Chinese content, you should replace these words with more easy-to-understand words:
+- 锚点
+- 接线
+- 门禁
+
+Besides, avoid figures of speech as much as possible. Using English for professional terms is acceptable.
