@@ -12,6 +12,7 @@ Review the test changes on the current branch, present a value-ranked inventory,
 - Resolve the base branch from the user's request; otherwise use `main`.
 - Run `git diff --stat <base>...HEAD -- '*_test.go'` and `git diff <base>...HEAD -- '*_test.go'`.
 - Inventory added, modified, and renamed test functions, not just files. Include new cases added to an existing test as part of that test.
+- Record a change type for every test: `Added`, `Modified`, `Renamed`, or `Deleted`. A test function with new cases is `Modified`; for a renamed test, include the old name (for example, `old name → new name`). A test removed during this review is `Deleted`.
 - Account for helpers and fixtures that exist only to support a test being considered for deletion.
 - If the branch changes no tests, say so and stop.
 
@@ -29,16 +30,17 @@ When unsure, prefer medium over low. Do not classify a test as low only because 
 
 Present a table with these columns:
 
-| Level | Test | Location | Why | Action |
-| ----- | ---- | -------- | --- | ------ |
+| Level | Change | Test | Location | Why | Action |
+| ----- | ------ | ---- | -------- | --- | ------ |
 
-Order high to low. For every low test, name the higher-level test that makes it redundant. Follow the user's language.
+`Change` must be one of `Added`, `Modified`, `Renamed`, or `Deleted`; localize the labels when the user's language differs. Order high to low. For every low test, name the higher-level test that makes it redundant. Follow the user's language.
 
 ## Delete
 
 - Delete only low tests whose coverage is genuinely duplicated or explicitly not required.
 - Never delete the last test for a behavior, a concurrency or atomicity test, a migration test, or a test that guards a previously observed regression.
 - Remove helpers and fixtures used only by the deleted tests.
+- Report removed tests with Change `Deleted`, and name the remaining test that retains the coverage.
 - Do not change production code in this workflow unless a deletion exposes an unused helper.
 
 ## Verify
